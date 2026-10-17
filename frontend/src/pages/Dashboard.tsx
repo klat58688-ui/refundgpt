@@ -42,7 +42,10 @@ export default function Dashboard() {
     <div className="min-h-screen">
       <header className="bg-paypal px-8 py-4 text-white flex items-center justify-between">
         <h1 className="text-xl font-bold tracking-tight">RefundGPT <span className="font-normal opacity-80">— AI Refund Assistant</span></h1>
-        <span className="text-sm opacity-80">PayPal AI Hackathon 2026</span>
+        <div className="flex items-center gap-4">
+          <Link to="/requests" className="text-sm bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition">All Requests (AG Grid)</Link>
+          <span className="text-sm opacity-80">PayPal AI Hackathon 2026</span>
+        </div>
       </header>
 
       <main className="max-w-6xl mx-auto p-6 space-y-6">

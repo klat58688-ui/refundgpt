@@ -10,3 +10,4 @@ last_rid.txt
 cred_*.png
 .pytest_cache/
 .venv/
+backend/app/static/

@@ -91,6 +91,22 @@ cd backend && pytest tests/
 - Single-user: no merchant accounts/login (optional shared `API_KEY` gate provided).
 - SQLite for dev; switch `DATABASE_URL` to PostgreSQL for production.
 
+## Deploy to Render (Blueprint)
+
+One service, one database — free tier works:
+
+1. Push this repo to GitHub.
+2. Render Dashboard → **New → Blueprint** → select the repo (`render.yaml` is auto-detected).
+3. Set the `sync: false` secrets in the Render dashboard: `LLM_API_KEY`, `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, (optional) `API_KEY`.
+4. Render builds the multi-stage [Dockerfile](Dockerfile): frontend `npm run build` → FastAPI serves both `/api/*` and the SPA on one port. PostgreSQL is wired via `DATABASE_URL` (SQLite fallback locally).
+5. Health check: `/api/health`.
+
+Local production-mode check: `cd frontend && npm run build && cp -r dist ../backend/app/static` then `uvicorn app.main:app --port 8001` — SPA and API on the same port.
+
+## AG Grid
+
+`/requests` is an AG Grid (Community) view: PayPal-branded Quartz theme, floating filters, set-filter on status, quick search, multi-row selection, CSV export, row click → analysis panel.
+
 ## Tools used (per hackathon rules)
 
 - **PayPal REST API v2** (Sandbox): OAuth2, Orders (test captures), Payments Refund, refund status lookup.
