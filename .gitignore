@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.env
+*.db
+node_modules/
+dist/
+uvicorn*.log
+last_capture.txt
+last_rid.txt
+cred_*.png
+.pytest_cache/
+.venv/
