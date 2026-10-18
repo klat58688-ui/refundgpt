@@ -68,7 +68,7 @@ export default function RequestsGrid() {
     { field: 'currency', headerName: 'Cur', width: 80 },
     {
       field: 'status', headerName: 'Status', width: 130, cellRenderer: StatusCell,
-      filter: 'agSetColumnFilter',
+      filter: 'agTextColumnFilter',  // agSetColumnFilter is Enterprise-only
     },
     {
       field: 'created_at', headerName: 'Created', width: 170,
@@ -107,7 +107,8 @@ export default function RequestsGrid() {
             columnDefs={cols}
             defaultColDef={{ sortable: true, filter: true, resizable: true, floatingFilter: true }}
             pagination
-            paginationPageSize={15}
+            paginationPageSize={20}
+            paginationPageSizeSelector={[20, 50, 100]}
             animateRows
             rowSelection={{ mode: 'multiRow' }}
             onRowClicked={(e) => nav(`/analyze/${e.data!.id}`)}
