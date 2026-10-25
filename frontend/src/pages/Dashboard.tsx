@@ -19,6 +19,7 @@ export default function Dashboard() {
   const { requests, stats, refresh, loading, error } = useStore()
   const [filter, setFilter] = useState<string>('all')
   const [text, setText] = useState('')
+  const [captureId, setCaptureId] = useState('')
   const [busy, setBusy] = useState(false)
   const nav = useNavigate()
 
@@ -28,8 +29,9 @@ export default function Dashboard() {
     if (text.trim().length < 5) return
     setBusy(true)
     try {
-      const r = await api.analyze(text)
+      const r = await api.analyze(text, captureId.trim() ? { paypal_capture_id: captureId.trim() } : {})
       setText('')
+      setCaptureId('')
       nav(`/analyze/${r.id}`)
     } catch (e: any) {
       alert(`AI analysis failed: ${e.message}`)
@@ -70,10 +72,18 @@ export default function Dashboard() {
           <textarea value={text} onChange={(e) => setText(e.target.value)} rows={4}
             placeholder="e.g. Hi, my headphones arrived defective, left ear no sound, order PP-12345 $79.99..."
             className="mt-2 w-full rounded-lg border-gray-300 border p-3 text-sm focus:ring-2 focus:ring-paypal focus:outline-none" />
-          <button onClick={submit} disabled={busy}
-            className="mt-3 bg-paypal hover:bg-paypal-dark text-white px-5 py-2 rounded-lg font-medium disabled:opacity-50 transition">
-            {busy ? 'Analyzing with AI…' : 'Analyze Refund Request'}
-          </button>
+          <div className="mt-2 flex items-center gap-3">
+            <input value={captureId} onChange={(e) => setCaptureId(e.target.value)}
+              placeholder="PayPal Capture ID (optional — required to execute the refund)"
+              className="flex-1 rounded-lg border-gray-300 border px-3 py-2 text-sm focus:ring-2 focus:ring-paypal focus:outline-none" />
+            <button onClick={submit} disabled={busy}
+              className="bg-paypal hover:bg-paypal-dark text-white px-5 py-2 rounded-lg font-medium disabled:opacity-50 transition whitespace-nowrap">
+              {busy ? 'Analyzing with AI…' : 'Analyze Refund Request'}
+            </button>
+          </div>
+          <p className="mt-1 text-xs text-gray-400">
+            Find the Capture ID in PayPal → Activity → the payment → Capture ID (Sandbox).
+          </p>
         </div>
 
         {/* filters + list */}

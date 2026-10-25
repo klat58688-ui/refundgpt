@@ -1,0 +1,40 @@
+1
+00:00:00,400 --> 00:00:05,600
+Refund requests: read the message, check the order, decide, refund - twenty times a day.
+
+2
+00:00:08,000 --> 00:00:14,800
+RefundGPT. Paste the conversation and the PayPal Capture ID.
+
+3
+00:00:15,200 --> 00:00:25,000
+The AI extracts the order, amount, claims and evidence, matches your refund policy,
+
+4
+00:00:25,100 --> 00:00:33,500
+and recommends an action with a confidence score - plus the reasoning, so you can disagree.
+
+5
+00:00:50,500 --> 00:00:56,500
+You stay the decision maker. Approve, change the amount, or reject.
+
+6
+00:01:12,500 --> 00:01:19,500
+Before money moves, it verifies the PayPal capture and checks the amount against it.
+
+7
+00:01:20,000 --> 00:01:27,500
+Then it refunds through the PayPal Refund API with an idempotency key - no double refunds.
+
+8
+00:01:52,000 --> 00:01:59,000
+That is a real sandbox refund, executed live - Refund ID visible in the receipt.
+
+9
+00:02:07,000 --> 00:02:12,000
+Every case lands in an AG Grid operations view, backed by an audit trail.
+
+10
+00:02:12,500 --> 00:02:16,200
+RefundGPT - the AI does the reading and the PayPal call. You keep the judgment.
+

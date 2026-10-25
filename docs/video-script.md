@@ -1,66 +1,49 @@
-# Demo Video Script — RefundGPT (target 2:20, hard cap 3:00)
+# Demo Video Script — RefundGPT (final cut 2:16)
 
-Format: 1600×900 screen recording, no music required (hackathon forbids unlicensed music). Recorded raw file: `refundgpt-demo.webm` (silent). Add voiceover + trimmed cut before uploading to YouTube.
+**Shipped file:** `refundgpt-demo-1080p.mp4` (1920×1080, 2:16, burned-in captions, silent) + `refundgpt-demo.srt` (editable captions).
 
-## Cut list (what to trim from the raw recording)
+Silent by design: judges often watch muted, and captions survive any player. Voiceover text is below if you want to record it in your own voice (TTS was blocked by the provider, so no synthetic voice was used).
 
-| Segment in raw file | Action |
+## What was cut from the 3:35 raw recording
+
+| Raw range | Reason |
 |---|---|
-| First ~10s: dashboard loads, cursor idle | Keep 3s only |
-| AI analysis wait (~55–65s, spinner) | **Cut** — hard cut to the analysis panel; mention "in production this is ~3 seconds" in voiceover |
-| Decision + confirm + execute | Keep in full (the money moment) |
-| AG Grid tour | Trim to ~20s |
-| Dashboard stats finale | Keep 5s |
+| 0:06 – 1:14 | dashboard idle while the LLM call ran (spinner only) |
+| 2:28 – 2:43 | approved-state idle before the PayPal execution |
 
-## Shot-by-shot
+Result: 3:35 → 2:16, all real product footage, no speed-up tricks.
 
-### 0:00–0:12 — The problem
-**On screen:** Refund queue full of unresolved requests (dashboard, pending filter).
-**Voiceover:** "Every small e-commerce team drowns in refund requests. Someone reads the message, checks the order, guesses whether the story adds up, checks the policy, then goes to PayPal and clicks refund. Twenty times a day. Inconsistently."
+## Caption timeline (as burned in)
 
-### 0:12–0:25 — The product
-**On screen:** Paste a customer message into the box, click *Analyze Refund Request*.
-**Voiceover:** "This is RefundGPT. Paste the conversation — or the text from a screenshot — and it does the reading, the policy check, and the PayPal work. You stay the decision-maker."
+| Time | Caption |
+|---|---|
+| 0:00 | Refund requests: read the message, check the order, decide, refund — twenty times a day. |
+| 0:08 | RefundGPT. Paste the conversation and the PayPal Capture ID. |
+| 0:15 | The AI extracts the order, amount, claims and evidence, matches your refund policy, |
+| 0:25 | and recommends an action with a confidence score — plus the reasoning, so you can disagree. |
+| 0:50 | You stay the decision maker. Approve, change the amount, or reject. |
+| 1:12 | Before money moves, it verifies the PayPal capture and checks the amount against it. |
+| 1:20 | Then it refunds through the PayPal Refund API with an idempotency key — no double refunds. |
+| 1:52 | That is a real sandbox refund, executed live — Refund ID visible in the receipt. |
+| 2:07 | Every case lands in an AG Grid operations view, backed by an audit trail. |
+| 2:12 | RefundGPT — the AI does the reading and the PayPal call. You keep the judgment. |
 
-### 0:25–0:55 — Structured analysis
-**On screen:** Three-panel analysis view: conversation | AI analysis (issue type, confidence, policy match, claims, evidence, reasoning) | decision panel.
-**Voiceover:** "No wall of text. It extracts the order, the amount, the issue type, the claims, and the evidence offered. It matches your refund policy and gives a recommendation with a confidence score — plus the reasoning, so you can disagree with it."
-**Zoom:** policy match card, reasoning paragraph.
+## Voiceover text (record in your own voice if desired)
 
-### 0:55–1:15 — Contradiction detection (the differentiator)
-**On screen:** Open the seeded "changed mind" case: claim "never used" while the photo shows an opened box. Red contradiction banner.
-**Voiceover:** "This is the case that matters. The customer says never used — but their own photo shows an opened box. RefundGPT flags the contradiction and recommends rejecting under the opened-item policy. A human reviewer would need to notice that. The model does it every time."
+1. (0:00) "Every small e-commerce team drowns in refund requests. Someone reads the message, checks the order, guesses whether the story adds up — twenty times a day."
+2. (0:08) "This is RefundGPT. Paste the conversation and the PayPal capture ID."
+3. (0:15) "It extracts the order, the amount, the claims and the evidence, matches your refund policy, and recommends an action — with a confidence score and the reasoning, so you can disagree with it."
+4. (0:50) "You stay the decision maker. Approve, change the amount, or reject."
+5. (1:12) "Before money moves, it verifies the PayPal capture and checks the amount against it. Then it refunds through the PayPal Refund API with an idempotency key, so a double click can never refund twice."
+6. (1:52) "That's a real sandbox refund, executed live."
+7. (2:07) "Every case lands in an AG Grid operations view, backed by an audit trail."
+8. (2:12) "RefundGPT — the AI does the reading and the PayPal call. You keep the judgment."
 
-### 1:15–1:50 — Decision → real PayPal refund
-**On screen:** Approve Full Refund → confirm modal (order, amount, type) → *Execute via PayPal* → green receipt `Refunded ✓ PayPal refund: 8US06443KN305825J`.
-**Voiceover:** "You approve — or change the amount, or reject. Before anything moves, RefundGPT verifies the PayPal capture and checks the amount against it. Then it refunds through the PayPal Refund API with an idempotency key, so a double click can never refund twice. This is a real sandbox refund, executed live."
-**Zoom:** the refund ID.
+## Upload checklist
 
-### 1:50–2:10 — Operations view (AG Grid)
-**On screen:** `/requests` grid: filter, quick search, CSV export, row click back into a case.
-**Voiceover:** "Every case lands in an AG Grid operations view — sortable, filterable, exportable. And every analysis, approval and execution is in the audit log, because refunds are money and money needs receipts."
-
-### 2:10–2:20 — Close
-**On screen:** Dashboard stats: processed today, average handling time, total refunded.
-**Voiceover:** "RefundGPT — the AI does the reading, the policy check and the PayPal call. You keep the judgment. Built with FastAPI, React, AG Grid and the PayPal REST API."
-
-## On-screen captions (for silent viewing)
-
-1. "Refund requests: read, check, decide, refund — 20× a day"
-2. "Paste the conversation"
-3. "Facts · policy · recommendation · confidence"
-4. "It caught the contradiction: 'never used' vs opened box"
-5. "Merchant approves — capture verified — PayPal refund"
-6. "Real sandbox refund: 8US06443KN305825J"
-7. "AG Grid operations view + audit log"
-8. "RefundGPT — agentic commerce for refunds"
-
-## Recording checklist
-
-- [ ] Backend on 8001, frontend built or dev server on 5173; browser at 1600×900, 100% zoom
-- [ ] Seed data present (`python seed.py`), including the contradiction case
-- [ ] A fresh sandbox capture prepared for the refund demo (see README: Orders API with test card `5424180279791732`)
-- [ ] Close notifications, hide bookmarks bar, mute system sounds
-- [ ] Trim the AI wait; total runtime ≤ 3:00
-- [ ] Upload to YouTube as **Public** (not unlisted) — judges must be able to open it
+- [ ] Upload `refundgpt-demo-1080p.mp4` to YouTube as **Public**
 - [ ] Title: "RefundGPT — AI refund analyst for PayPal (Hackathon demo)"
+- [ ] Description: repo link + one-line pitch + "PayPal sandbox demo"
+- [ ] Paste the YouTube URL into the Devpost form
+- [ ] Do **not** add licensed music — the hackathon forbids it
+
