@@ -115,3 +115,8 @@ Local production-mode check: `cd frontend && npm run build && cp -r dist ../back
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+## Submission materials
+
+- [Devpost copy](docs/devpost-submission.md) — paste-ready submission text + tools table
+- [Demo video script](docs/video-script.md) — shot list, voiceover, trim map
